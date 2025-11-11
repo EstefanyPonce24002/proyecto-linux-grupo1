@@ -279,12 +279,14 @@ Verificación:
 
 ## Créditos
 
-Integrantes:
-**Grupo 1**
-**Samuel Timoteo Cortéz Hernández — CH21024**
-**Luis Eduardo Molina Cáceres — MC23015**
-**José Wilfredo Ponce Barahona — PB24007**
-**Ana Estefany Quintanilla de Ponce — QP24002**
+|    **Integrantes  Grupo 1**           |       Carnet           |
+| --------------------------------------|----------------------- |
+| **Samuel Timoteo Cortéz Hernández**   |     **CH21024**        |
+| **Luis Eduardo Molina Cáceres**       |     **MC23015**        |
+| **José Wilfredo Ponce Barahona**      |     **PB24007**        |
+| **Ana Estefany Quintanilla de Ponce** |     **QP24002**        |
+
+
 Proyecto desarrollado en entorno **Debian + Apache + Docker**  
 Asignatura: _Introducción al Software Libre_  
 Tutor GT03: _Ing. Francisco Javier Morales Ayala_
