@@ -1,0 +1,3 @@
+CONTAINER ID   IMAGE         COMMAND    CREATED             STATUS                         PORTS     NAMES
+45539f058265   hello-world   "/hello"   About an hour ago   Exited (0) About an hour ago             nostalgic_darwin
+e2e75fc28c04   hello-world   "/hello"   2 days ago          Exited (0) 2 days ago                    dazzling_goldwasser

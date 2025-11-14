@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# --------------------------------------------------------
+# Script: reporte_sistema.sh
+# Descripción: Muestra información del sistema y Docker
+# --------------------------------------------------------
+
 echo "==== REPORTE DEL SISTEMA ===="
 echo "Fecha y hora: $(date)"
 echo "Hostname: $(hostname)"
@@ -8,4 +13,4 @@ echo "Espacio libre en disco (/): $(df -h / | awk 'NR==2 {print $4}')"
 echo "Memoria RAM disponible: $(free -h | awk '/Mem:/ {print $7}')"
 echo "Contenedores Docker activos: $(docker ps -q | wc -l)"
 echo "=============================="
-#ponce#
+
