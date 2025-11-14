@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Proyecto Final - Servidor Linux Automatizado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- ======================
+         ESTILOS PRINCIPALES
+         ====================== -->
+    <style>
+        /* ===== Paleta y variables ===== */
+        :root{
+        --fondo: #1B1A36;
+            --azul-principal: #1679AB;
+            --azul-claro: #47B5FF;
+            --texto: #F5F5F5;
+            --texto-secundario: #AABFD5;
+            --acento: #FFD85E;
+            --nav-height: 60px; /* altura consistente para nav fijo */
+        }
+
+	Reset ligero y base ===== */
+        html { font-size: 14px; box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: inherit; }
+        body{
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.45;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            /* Reservar espacio para la barra fija */
+            padding-top: var(--nav-height);
+            scroll-behavior: smooth;
+        }
+
+        /* ===== Barra de navegación fija =====
+           - Se usa position: fixed; por eso el padding-top en body. */
+        nav{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(27,26,54,0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 0 1rem;
+        }
+        nav .nav-inner{
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+        nav a{
+            color: var(--texto);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            transition: color 180ms ease, background 180ms ease;
+        }
+        nav a:hover{ color: var(--acento); background: rgba(255,255,255,0.02); }
+
+        /* ===== Encabezado principal =====
+           - Centrado, con gradiente sutil y margen inferior para separar del contenido */
+        header{
+            text-align: center;
+            padding: 2.2rem 1rem;
+            background: linear-gradient(var(--azul-principal), var(--azul-principal));
+            box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+            margin-bottom: 0.6rem;
+        }
+        header h1{ font-size: 1.6rem; margin: 0.15rem 0 0.4rem; font-weight: 600; color: var(--texto); }
+        header h2{ font-size: 1.2rem; margin: 0; font-weight: 400; color: var(--texto); opacity: 1.0; }
+
+        /* ===== Bloque de descripción del proyecto ===== */
+        .proyecto {
+            text-align: center;
+            margin: 1.3rem auto;
+            max-width: 1000px;
+            padding: 0 1rem;
+        }
+        .proyecto h3{
+            font-size: 1.3rem;
+            color: var(--azul-claro);
+            margin-bottom: 1.0rem;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+            border-bottom: 2px solid var(--acento);
+            border-radius: 4px;
+        }
+        .proyecto p{
+            font-size: 1.0rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.03);
+            padding: 1.3rem 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.12);
+            margin: 0 auto;
+        }
+
+        /* ===== Contenedores de secciones con fondo leve ===== */
+        .section-wrap{
+            max-width: 1000px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+        }
+        .section-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008));
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== Grid de miembros =====
+           - Usa repeat(auto-fit,minmax()) para responsividad fluida */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.3rem;
+            align-items: start;
+        }
+
+        /* ===== Tarjeta individual ===== */
+        .card {
+            background-color: rgba(71,181,255,0.06);
+            border-radius: 12px;
+            padding: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            transition: transform 180ms ease, box-shadow 180ms ease, border 180ms ease;
+            border: 1px solid transparent;
+            min-height: 64px;
+        }
+
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(22,121,171,0.14);
+            border: 1px solid rgba(71,181,255,0.14);
+        }
+
+        /* ===== Avatar ===== */
+        .avatar {
+            background: radial-gradient(circle at 30% 30%, var(--azul-claro), var(--azul-principal));
+            color: var(--texto);
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(71,181,255,0.32);
+            flex-shrink: 0;
+        }
+
+        /* ===== Meta (nombre y código) ===== */
+        .meta .name {
+            padding: 0.1rem 0rem;
+            font-weight: 550;
+            font-size: 0.95rem;
+            color: var(--texto);
+            line-height: 0.98;
+        }
+        .meta .code {
+            padding: 0.1rem 0rem;
+            font-size: 0.90rem;
+            font-weight: 550;
+            color: var(--texto-secundario);
+            margin-top: 4px;
+        }
+
+        /* ==== Bloque: Herramientas ==== */
+        .tools-section {
+        background-color: rgba(255, 255, 255, 0.03);
+        margin: 1.3rem auto;
+        padding: 1.3rem;
+        border-radius: 1rem;
+        max-width: 970px;
+        transition: all 0.3s ease;
+        }
+
+        .section-title {
+        text-align: center;
+        color: var(--acento);
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1.0rem;
+        letter-spacing: 1px;
+        }
+
+        /* Contenedor flexible */
+        .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.3rem;
+        }
+
+        /* Tarjeta individual */
+        .tool-card {
+        display: flex;
+        align-items: center;
+        background-color: rgba(71, 181, 255, 0.06);
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 1.2rem;
+        transition: transform 180ms ease, box-shadow 180ms ease, border 180ms ease;
+        }
+
+        .tool-card:hover {
+        border-color: var(--azul-claro);
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(22,181,171,0.14);
+        border: 1px solid rgba(71,181,255,0.14);
+        }
+
+        /* Icono de herramienta */
+        .tool-icon {
+        font-size: 1.8rem;
+        margin-top: -6.99rem;
+        margin-right: 1rem;
+        color: var(--azul-claro);
+        }
+
+        /* Texto */
+        .tool-info h3 {
+        color: var(--texto);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        }
+
+        .tool-info p {
+        color: var(--texto-secundario);
+        font-size: 1.0rem;
+        line-height: 1.3;
+        }
+
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 0.9rem;
+            background-color: var(--azul-principal);
+            color: var(--texto);
+            font-size: 1.0rem;
+            letter-spacing: 0.4px;
+            margin-top: 1.6rem;
+            border-radius: 6px;
+            max-width: 2000px;
+        }
+
+        /* ===== Responsive tweaks ===== */
+        @media (max-width: 760px){
+            .avatar { width: 48px; height: 48px; min-width:48px; font-size:0.95rem; }
+            nav .nav-inner { gap: 0.6rem; }
+            header { padding: 1.6rem 1rem; }
+        }
+        @media (max-width:420px){
+            html{ font-size:13px; }
+            .card { gap:0.6rem; padding:0.6rem; }
+            .meta .name { font-size:0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================
+         NAV: Barra superior fija
+         ============================
+         Comentario: enlaces de navegación que llevan a secciones internas. -->
+    <nav aria-label="Barra de navegación">
+        <div class="nav-inner">
+            <a href="#inicio">Inicio</a>
+            <a href="#proyecto">Proyecto</a>
+            <a href="#equipo">Equipo</a>
+            <a href="#tutor">Tutor</a>
+            <a href="#herramientas">Herramientas</a>
+        </div>
+    </nav>
+
+    <!-- ============================
+         HEADER: Título principal
+         ============================
+         Comentario: muestra carrera y tipo de trabajo. El padding se ajusta al nav fijo. -->
+    <header id="inicio" role="banner">
+        <h1>Introducción al Software Libre</h1>
+        <h2>PROYECTO FINAL</h2>
+	<h2><h2>
+    </header>
+
+    <!-- ============================
+         SECCIÓN: Descripción del proyecto
+         ============================-->
+
+    <main>
+        <section id="proyecto" class="proyecto" aria-labelledby="proyecto-title">
+            <h3 id="proyecto-title">Implementación de un Servidor Linux Automatizado con Docker</h3>
+            <p>
+                Este proyecto demuestra la creación de un entorno automatizado en Linux, utilizando contenedores Docker para desplegar
+                y monitorear servicios web. Su propósito es optimizar la administración de recursos y simplificar el despliegue en
+                contextos educativos y empresariales.
+            </p>
+        </section>
+
+        <!-- ============================
+             SECCIÓN: Integrantes
+             ============================
+             Comentario: grid responsivo con tarjetas para cada integrante. -->
+        <section id="equipo" class="section-wrap" aria-labelledby="team-title">
+            <div class="section-card">
+                <h2 id="team-title" style="font-size:1.3rem; margin:0 0 1.0rem 0; color: var(--acento); text-align:center;">Integrantes del Equipo 1</h2>
+
+                <!-- Grid principal de miembros -->
+                <div class="team-grid" role="list">
+                    <!-- Tarjeta 1 -->
+                    <article class="card" role="listitem" aria-label="Cortez Hernández, Samuel Timoteo">
+                        <div class="avatar" aria-hidden="true">CH</div>
+                        <div class="meta">
+                            <div class="name">Cortez Hernández, Samuel Timoteo</div>
+                            <div class="code">CH21024</div>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta 2 -->
+                    <article class="card" role="listitem" aria-label="Molina Cáceres, Luis Eduardo">
+                        <div class="avatar" aria-hidden="true">MC</div>
+                        <div class="meta">
+                            <div class="name">Molina Cáceres, Luis Eduardo</div>
+                            <div class="code">MC23015</div>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta 3 -->
+                    <article class="card" role="listitem" aria-label="Ponce Barahona, Jose Wilfredo">
+                        <div class="avatar" aria-hidden="true">PB</div>
+                        <div class="meta">
+                            <div class="name">Ponce Barahona, Jose Wilfredo</div>
+                            <div class="code">PB24007</div>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta 4 -->
+                    <article class="card" role="listitem" aria-label="Quintanilla de Ponce, Ana Estefany">
+                        <div class="avatar" aria-hidden="true">QP</div>
+                        <div class="meta">
+                            <div class="name">Quintanilla de Ponce, Ana Estefany</div>
+                            <div class="code">QP24002</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             SECCIÓN: Tutor
+             ============================
+             Comentario: bloque con datos del tutor. -->
+      <section id="tutor" class="section-wrap" aria-labelledby="tutor-title">
+        <div class="section-card">
+            <h2 id="tutor-title" style="font-size:1.3rem; margin:0 0 1.0rem; color: var(--acento); text-align:center;">
+            Tutor del Proyecto
+            </h2>
+
+            <div class="team-grid" style="grid-template-columns: 1fr; max-width:950px; justify-items:center;">
+            <article class="card tutor-card" role="article" aria-label="Ing. Francisco Javier Morales Ayala" style="width: 75%;">
+                <div class="meta">
+                <div class="name">Ing. Francisco Javier Morales Ayala</div>
+                <div class="code">Tutor GT03</div>
+                </div>
+            </article>
+            </div>
+        </div>
+</section>
+
+
+
+        <!-- ==================== HERRAMIENTAS UTILIZADAS ==================== -->
+<section class="tools-section">
+  <h2 id="herramientas" class="section-title">Herramientas Utilizadas</h2>
+  
+  <div class="tools-grid">
+    <!-- Tarjeta 1 -->
+    <article class="tool-card">
+    <div class="tool-icon" style="display:flex; align-items:center; justify-content:center; width:60px; height:60px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Openlogo-debianV2.svg" alt="Logo Debian 13" 
+      style="width:30px; height:30px; object-fit:contain;"></div>
+    <div class="tool-info">
+        <h3>Debian 13</h3>
+        <p>Sistema base del servidor, elegido por su estabilidad y compatibilidad con entornos Docker.</p>
+      </div>
+    </article>
+
+    <!-- Tarjeta 2 -->
+    <article class="tool-card">
+      <div class="tool-icon">🐳</div>
+      <div class="tool-info">
+        <h3>Docker</h3>
+        <p>Utilizado para la contenedorización del servidor web, garantizando portabilidad y despliegue rápido.</p>
+      </div>
+    </article>
+
+    <!-- Tarjeta 3 -->
+    <article class="tool-card">
+      <div class="tool-icon">🧰</div>
+      <div class="tool-info">
+        <h3>Nginx</h3>
+        <p>Servidor web implementado dentro del contenedor Docker, configurado para servir contenido HTML personalizado.</p>
+      </div>
+    </article>
+
+    </main>
+
+    <!-- ============================
+         FOOTER
+         ============================-->
+ 
+    <footer>
+        © 2025 - Universidad de El Salvador | Ingeniería en Desarrollo de Software
+    </footer>
+
+</body>
+</html>
