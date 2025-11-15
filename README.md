@@ -252,7 +252,7 @@ Verificación:
 
 ## 6. Comparación y Validación
 
-| Aspecto      | Contenedor Apache (Personalizado) | Servidor Apache Nativo |
+| Aspecto      | Contenedor Nginx (Personalizado)  | Servidor Nginx         |
 | ------------ | --------------------------------- | ---------------------- |
 | Portabilidad | Alta (imagen Docker)              | Media                  |
 | Aislamiento  | Completo                          | Parcial                |
@@ -287,7 +287,7 @@ Verificación:
 | **Ana Estefany Quintanilla de Ponce** |     **QP24002**        |
 
 
-Proyecto desarrollado en entorno **Debian + Apache + Docker**  
+Proyecto desarrollado en entorno **Debian + Docker + Nginx**  
 Asignatura: _Introducción al Software Libre_  
 Tutor GT03: _Ing. Francisco Javier Morales Ayala_
-_Universidad de El Salvador_
+**Universidad de El Salvador**
