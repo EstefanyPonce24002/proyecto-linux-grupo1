@@ -294,9 +294,11 @@ Verificación:
 | **Ana Estefany Quintanilla de Ponce** |     **QP24002**        |
 
 ---
+
 Proyecto desarrollado en entorno **Debian + Docker + Nginx**  
 Asignatura: _Introducción al Software Libre_  
 Tutor GT03: _Ing. Francisco Javier Morales Ayala_
+
 ---
 
 **Universidad de El Salvador**
