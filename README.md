@@ -6,8 +6,7 @@ Este proyecto forma parte de la asignatura **Introducción al Software Libre** y
 **servidor Linux automatizado** mediante el uso de **Docker**, integrando prácticas de **administración de sistemas,
 control de versiones y virtualización**.
 
-El entorno fue configurado sobre **Debian 13 (Trixie)**, utilizando **Apache2** como servidor web principal,
-en sustitución de Nginx debido a limitaciones de espacio en el sistema.
+El entorno fue configurado sobre **Debian 13 (Trixie)**, utilizando **Nginx** como servidor web principal.
 
 ---
 
@@ -65,14 +64,20 @@ Se creó el archivo `/proyecto/scripts/reporte_sistema.sh` con el siguiente cont
 
 ```bash
 #!/bin/bash
-echo "===== REPORTE DEL SISTEMA ====="
-echo "Fecha y hora actual: $(date)"
-echo "Nombre del host: $(hostname)"
+
+# --------------------------------------------------------
+# Script: reporte_sistema.sh
+# Descripción: Muestra información del sistema y Docker
+# --------------------------------------------------------
+
+echo "==== REPORTE DEL SISTEMA ===="
+echo "Fecha y hora: $(date)"
+echo "Hostname: $(hostname)"
 echo "Usuarios conectados: $(who | wc -l)"
-echo "Espacio libre en disco (/): $(df -h / | awk 'NR==2{print $4}')"
+echo "Espacio libre en disco (/): $(df -h / | awk 'NR==2 {print $4}')"
 echo "Memoria RAM disponible: $(free -h | awk '/Mem:/ {print $7}')"
 echo "Contenedores Docker activos: $(docker ps -q | wc -l)"
-echo "===================================="
+echo "=============================="
 ```
 
 Permisos de ejecución:
@@ -191,7 +196,7 @@ docker ps -a
 
 ---
 
-## 5. Servidor Web con Apache (Containerizado)
+## 5. Servidor Web con Nginx (Containerizado)
 
 ### 5.1 Archivo Web
 
@@ -201,11 +206,13 @@ Se creó un archivo `/proyecto/web/index.html`:
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Servidor Grupo 1</title>
+    <title>Proyecto Final - Servidor Linux Automatizado</title>
   </head>
   <body>
-    <h1>Servidor Automatizado con Apache y Docker</h1>
-    <p>Proyecto Linux - Grupo 1</p>
+    <h1>Servidor Automatizado con Nginx y Docker</h1>
+    <p>Este proyecto demuestra la creación de un entorno automatizado en Linux, utilizando contenedores Docker para desplegar
+       y monitorear servicios web. Su propósito es optimizar la administración de recursos y simplificar el despliegue en
+       contextos educativos y empresariales.</p>
   </body>
 </html>
 ```
