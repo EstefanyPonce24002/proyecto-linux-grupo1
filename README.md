@@ -146,6 +146,14 @@ git branch -M main
 git push -u origin main
 ```
 
+Creación del archivo README.md:
+
+```nano README.md
+git add README.md
+git commit -m "Agregado README.md con descripción del proyecto"
+git push
+```
+
 ---
 
 ## 4. Docker
@@ -191,6 +199,7 @@ docker run hello-world
 Listar contenedores activos:
 
 ```bash
+docker run hello-world
 docker ps -a
 ```
 
@@ -217,9 +226,13 @@ Se creó un archivo `/proyecto/web/index.html`:
 </html>
 ```
 
----
+Ejecución del contenedor:
 
-### 5.2 Configuración del Contenedor Apache
+```
+docker run -d -p 8080:80 -v /proyecto/web:/usr/share/nginx/html --name nginx_grupo1 nginx
+```
+
+---
 
 Archivo **Dockerfile** en `/proyecto/`:
 
