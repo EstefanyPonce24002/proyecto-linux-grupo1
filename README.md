@@ -226,7 +226,7 @@ Se creó un archivo `/proyecto/web/index.html`:
 </html>
 ```
 
-Ejecución del contenedor:
+### 5.2 Ejecución del contenedor:
 
 ```
 docker run -d -p 8080:80 -v /proyecto/web:/usr/share/nginx/html --name nginx_grupo1 nginx
@@ -234,7 +234,9 @@ docker run -d -p 8080:80 -v /proyecto/web:/usr/share/nginx/html --name nginx_gru
 
 ---
 
-Archivo **Dockerfile** en `/proyecto/`:
+## 6 Docker Avanzado
+
+### 6.1 Archivo **Dockerfile** en `/proyecto/`:
 
 ```Dockerfile
 # Imagen base
@@ -247,7 +249,7 @@ COPY web/ /usr/local/apache2/htdocs/
 EXPOSE 80
 ```
 
-Construcción de la imagen personalizada:
+### 6.2 Construcción de la imagen personalizada:
 
 ```bash
 sudo docker build -t servidor-grupo1 .
