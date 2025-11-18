@@ -240,13 +240,16 @@ docker run -d -p 8080:80 -v /proyecto/web:/usr/share/nginx/html --name nginx_gru
 
 ```Dockerfile
 # Imagen base
-FROM httpd:latest
+FROM nginx:latest
 
 # Copiar los archivos del sitio web
-COPY web/ /usr/local/apache2/htdocs/
+COPY web/ /usr/share/nginx/html/
 
 # Exponer el puerto 80
 EXPOSE 80
+
+# Comando de inicio de Nginx
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
 ### 6.2 Construcción de la imagen personalizada:
