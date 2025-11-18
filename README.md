@@ -272,7 +272,7 @@ Verificación:
 
 ---
 
-## 6. Comparación y Validación
+## Comparación y Validación
 
 | Aspecto      | Contenedor Nginx (Personalizado)  | Servidor Nginx         |
 | ------------ | --------------------------------- | ---------------------- |
