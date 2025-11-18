@@ -141,7 +141,7 @@ proyecto-linux-grupo1
 Y se vinculó con el repositorio local:
 
 ```bash
-git remote add origin https://github.com/tu_usuario/proyecto-linux-grupo1.git
+git remote add origin https://github.com/EstefanyPonce24002/proyecto-linux-grupo1.git
 git branch -M main
 git push -u origin main
 ```
