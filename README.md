@@ -245,8 +245,8 @@ FROM nginx:latest
 # Copiar los archivos del sitio web
 COPY web/ /usr/share/nginx/html/
 
-# Exponer el puerto 81
-EXPOSE 81
+# Exponer el puerto 80
+EXPOSE 80
 
 # Comando de inicio de Nginx
 CMD ["nginx", "-g", "daemon off;"]
@@ -261,7 +261,7 @@ sudo docker build -t servidor-grupo1 .
 Ejecución del contenedor:
 
 ```bash
-sudo docker run -d -p 8080:81 servidor-grupo1
+sudo docker run -d -p 8081:80 servidor-grupo1
 ```
 
 Verificación:
