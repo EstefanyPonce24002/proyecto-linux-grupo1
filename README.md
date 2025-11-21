@@ -261,7 +261,7 @@ sudo docker build -t servidor-grupo1 .
 Ejecución del contenedor:
 
 ```bash
-sudo docker run -d -p 8081:80 servidor-grupo1
+sudo docker run -d -p 8081:80 name nginx_custom_grupo1 servidor-grupo1
 ```
 
 Verificación:
